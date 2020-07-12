@@ -1,5 +1,5 @@
 const Discord = require("discord.js");
-const { prefix, token } = require("./auth.json");
+const {token } = require("./auth.json");
 const ytdl = require("ytdl-core");
 const h = require("./help.json");
 const tunes = require('./tunes.json');
@@ -193,4 +193,4 @@ function tags(message, song){
 	});
 	message.channel.send([...new Set(result)]);
 }
-client.login(token);
+client.login(process.env.token);
