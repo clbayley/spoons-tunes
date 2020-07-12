@@ -1,14 +1,12 @@
 const ramda = require('ramda')
 const tunes = require('./tunes.json');
-const ytdl = require("ytdl-core");
-const h = require("./help.json");
 
 const spoon = {
   playSomething: function(tag){
     var result;
     var tune = tunes.filter(x=>x.tags.includes(tag));
     if(tune && tune.length){
-      var index = Math.floor(Math.random() * tune.length-1);
+      var index = Math.floor(Math.random() * tune.length);
       result = tune[index].source;
     }
     return result;

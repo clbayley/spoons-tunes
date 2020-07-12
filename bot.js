@@ -1,5 +1,7 @@
+require('dotenv').config();
+
 const Discord = require("discord.js");
-const {token } = require("./auth.json");
+const {prefix } = require("./auth.json");
 const ytdl = require("ytdl-core");
 const h = require("./help.json");
 const tunes = require('./tunes.json');
