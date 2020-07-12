@@ -1,0 +1,32 @@
+[
+  {
+    "commands": ["ultimate", "rickroll"],
+    "source": "https://www.youtube.com/watch?v=Vd53Ay21YcE",
+    "tags": []
+  },
+  {
+    "commands":["despacito", "sosad"],
+    "source": "https://www.youtube.com/watch?v=H-tqpHETYhc",
+    "tags": ["fun"]
+  },
+  {
+    "commands": ["risingsun"],
+    "source": "https://www.youtube.com/watch?v=xJh865acA-U",
+    "tags": ["pensive"]
+  },
+  {
+    "commands":["metallica", "nothingelsematters"],
+    "source": "https://www.youtube.com/watch?v=vQN2-dX0R1E",
+    "tags": ["pensive"]
+  },
+  {
+    "commands": ["toxicity"],
+    "source": "https://www.youtube.com/watch?v=X5d8bnvO2JQ",
+    "tags": ["bardcore"]
+  },
+  {
+    "commands": ["thunderstruck"],
+    "source": "https://www.youtube.com/watch?v=RZ4H0KJezNE",
+    "tags": ["bardcore"]
+  }
+]

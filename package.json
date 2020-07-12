@@ -1,0 +1,22 @@
+{
+  "name": "goodfellow",
+  "version": "1.0.0",
+  "description": "Play the Lute",
+  "main": "bot.js",
+  "author": "Caroline Bayley",
+  "scripts": {
+      "serve": "node bot.js"
+
+    },
+  "dependencies": {
+    "@discordjs/opus": "^0.3.2",
+    "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+    "discord.js": "^12.2.0",
+    "ffmpeg": "0.0.4",
+    "ffmpeg-static": "^4.2.5",
+    "fluent-ffmpeg": "^2.1.2",
+    "ramda": "^0.27.0",
+    "winston": "^3.3.3",
+    "ytdl-core": "^3.1.2"
+  }
+}
