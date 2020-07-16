@@ -36,6 +36,15 @@ client.on("message", async message => {
     execute(message, serverQueue, "music");
     return;
   }
+  else if (message.content.toLowerCase().startsWith(`${prefix}volume`)) {
+      if(serverQueue){
+        serverQueue.volume = message.content.split(' ')[2];
+        return message.channel.send(
+          "done!"
+        );
+      }
+      return;
+    }
 	 else if (message.content.toLowerCase().startsWith(`${prefix}skip`)) {
     skip(message, serverQueue);
     return;
@@ -85,7 +94,7 @@ async function soundEffect(sound, message){
 		);
 	}
 		var connection = await voiceChannel.join();
-		connection.play('./files/howl.mp3')
+	//	connection.play('./files/howl.mp3')
 
 };
 

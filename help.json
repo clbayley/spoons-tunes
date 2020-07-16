@@ -1,11 +1,12 @@
 [
   "Here are some things you can ask Spoon to do:",
-  "`!play something [tag]` <- try 'Fun'. This adds something fun to to Spoon's set list. To play immediately, use `!play something [tag] now`",
-  "`!play [song shortcut]` <- try 'despacito'  This adds despacito to Spoon's set list. To play immediately, use `!play [song shortcut] now`",
-  "`!play [youtube url]` <- try <https://www.youtube.com/watch?v=Vd53Ay21YcE> This adds the youtube song to to Spoon's set list. To play immediately, use `!play [youtube url] now`",
-  "`!skip` <- skips the current song in the queue",
-  "`!songs` <- gets the list of songs in Spoon's repetoire",
-  "`!setlist` <- gets the current list of songs in Spoon's setlist.",
-  "`!tags` <- gets the list of available tags in Spoon's repetoire."
+  "`spoon play something [tag]` <- try 'Fun'. This adds something fun to to Spoon's set list. To play immediately, use `Spoon play something [tag] now`",
+  "`spoon play [song shortcut]` <- try 'despacito'  This adds despacito to Spoon's set list. To play immediately, use `Spoon play [song shortcut] now`",
+  "`spoon play [youtube url]` <- try <https://www.youtube.com/watch?v=Vd53Ay21YcE> This adds the youtube song to to Spoon's set list. To play immediately, use `Spoon play [youtube url] now`",
+  "`spoon skip` <- skips the current song in the queue",
+  "`spoon songs` <- gets the list of songs in Spoon's repetoire",
+  "`spoon setlist` <- gets the current list of songs in Spoon's setlist.",
+  "`spoon tags` <- gets the list of available tags in Spoon's repetoire.",
+  "`spoon learn ([song shortcut]) [youtube url] tag1,tag2,tag,3` Spoon learns a new song."
 
 ]
