@@ -300,9 +300,9 @@ async function songs(message, song){
 	var t = await spoon.getSongs();
 
 	//var r = ramda.clone(tunes).map(x=>x.tags);
-	t.forEach((item, i) => {
-    message.channel.send(item);
-	});
-//	message.channel.send([...new Set(result)]);
+//	t.forEach((item, i) => {
+//    message.channel.send(item);
+//	});
+	message.channel.send(t);
 }
 client.login(process.env.token);

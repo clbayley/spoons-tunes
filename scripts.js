@@ -104,7 +104,7 @@ const spoon = {
         if(result && result.length){
           var r=[];
           var fields = result.map(o=>o.fields);
-          console.log(tags);
+          console.log(fields);
           fields.forEach((item, i) => {
             r.push(`name: ${item.Command}, url: ${item.URL}`)
           });
