@@ -6,7 +6,6 @@
   "author": "Caroline Bayley",
   "scripts": {
     "start": "node tunes.js"
-
   },
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
