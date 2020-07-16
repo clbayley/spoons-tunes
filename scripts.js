@@ -1,7 +1,10 @@
 const ramda = require('ramda')
 const tunes = require('./tunes.json');
-
+//const moods = require('./moods.json');
 const spoon = {
+  getMood:function(name){
+    return moods.find(x=>x.name == name.toLowerCase()).source;
+  },
   playSomething: function(tag){
     var result;
     var tune = tunes.filter(x=>x.tags.includes(tag));
