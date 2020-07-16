@@ -112,7 +112,7 @@ const spoon = {
         }
 
       });
-      return fields;
+      return tags;
   }
 
 }
