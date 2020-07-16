@@ -294,4 +294,15 @@ async function tags(message, song){
 	});
 	message.channel.send([...new Set(result)]);
 }
+
+async function songs(message, song){
+  var result =[];
+	var t = await spoon.getSongs();
+
+	//var r = ramda.clone(tunes).map(x=>x.tags);
+	t.forEach((item, i) => {
+    message.channel.send(item);
+	});
+//	message.channel.send([...new Set(result)]);
+}
 client.login(process.env.token);

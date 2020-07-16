@@ -93,6 +93,26 @@ const spoon = {
 
       });
       return tags;
+  },
+  getSongs: async function(){
+    var query = {
+        maxRecords: 10000,
+        view: "Grid View"
+      };
+      var tags = await base('Tunes').select().firstPage().then(result=>{
+        console.log(result)
+        if(result && result.length){
+          var r=[];
+          var fields = result.map(o=>o.fields);
+          console.log(tags);
+          fields.forEach((item, i) => {
+            r.push(`name: ${item.Command}, url: ${item.URL}`)
+          });
+          return r;
+        }
+
+      });
+      return fields;
   }
 
 }
