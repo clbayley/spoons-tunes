@@ -26,47 +26,49 @@ client.once("disconnect", () => {
 });
 
 client.on("message", async message => {
+
   if (message.author.bot) return;
-  if (!message.content.startsWith(prefix)) return;
+  if (!message.content.toLowerCase().startsWith(prefix)) return;
 
   const serverQueue = queue.get(message.guild.id);
 
-  if (message.content.startsWith(`${prefix}play`)) {
+  if (message.content.toLowerCase().startsWith(`${prefix}play`)) {
     execute(message, serverQueue, "music");
     return;
-  } else if (message.content.startsWith(`${prefix}mood`)) {
-    execute(message, serverAmbience, "mood");
-    return;
   }
-	 else if (message.content.startsWith(`${prefix}skip`)) {
+	 else if (message.content.toLowerCase().startsWith(`${prefix}skip`)) {
     skip(message, serverQueue);
     return;
   }
-	else if (message.content.startsWith(`${prefix}help`)) {
+	else if (message.content.toLowerCase().startsWith(`${prefix}help`)) {
 		help(message, serverQueue);
     return;
-  }	else if (message.content.startsWith(`${prefix}songs`)) {
+  }	else if (message.content.toLowerCase().startsWith(`${prefix}songs`)) {
 			songs(message, serverQueue);
 	    return;
 	  }
-		else if (message.content.startsWith(`${prefix}setlist`)) {
+		else if (message.content.toLowerCase().startsWith(`${prefix}setlist`)) {
 	 	setlist(message, serverQueue);
 	 	return;
 	 }
-	 else if (message.content.startsWith(`${prefix}stop`)) {
+	 else if (message.content.toLowerCase().startsWith(`${prefix}stop`)) {
     stop(message, serverQueue);
     return;
   }
-	else if (message.content.startsWith(`${prefix}tags`)) {
+	else if (message.content.toLowerCase().startsWith(`${prefix}tags`)) {
 	 tags(message, serverQueue);
 	 return;
+ }
+ else if (message.content.toLowerCase().startsWith(`${prefix}learn`)) {
+  learn(message);
+  return;
  }
  else if (message.content.startsWith(`${prefix}@`)) {
 	soundEffect(message.content.split('@')[1],message);
 	return;
 }
  else {
-    message.channel.send("You need to enter a valid command!");
+    message.channel.send("oh no that maks no sens try agen pls");
   }
 });
 
@@ -74,12 +76,12 @@ async function soundEffect(sound, message){
 	const voiceChannel = message.member.voice.channel;
 	if (!voiceChannel)
 		return message.channel.send(
-			"You need to be in a voice channel to play music!"
+      "pls join a voice chanel first so i can sing for u!"
 		);
 	const permissions = voiceChannel.permissionsFor(message.client.user);
 	if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
 		return message.channel.send(
-			"I need the permissions to join and speak in your voice channel!"
+      "i need permishun to join and speak in your voice chanel!"
 		);
 	}
 		var connection = await voiceChannel.join();
@@ -94,38 +96,47 @@ async function execute(message, serverQueue, type) {
   const voiceChannel = message.member.voice.channel;
   if (!voiceChannel)
     return message.channel.send(
-      "You need to be in a voice channel to play music!"
+      "pls join a voice chanel first so i can sing for u!"
     );
   const permissions = voiceChannel.permissionsFor(message.client.user);
   if (!permissions.has("CONNECT") || !permissions.has("SPEAK")) {
     return message.channel.send(
-      "I need the permissions to join and speak in your voice channel!"
+      "i need permishun to join and speak in your voice chanel!"
     );
   }
 	var url;
+  var fn;
 	var playNow = false;
 	if(type == "music"){
-		if(args[1] == "something"){
-			url = spoon.playSomething(args[2]);
+		if(args[2] == "something"){
+			url = await spoon.playSomething(args[3]);
+      if(!url){
+        return message.channel.send(`i dont know any ${args[3]} tunes sorry`);
+      }
+			if(args[4] == "now"){
+				playNow = true;
+			}
+		}
+    else if(args[2].startsWith('http')){
+      url = args[2];
+      if(args[3] == "now"){
+        playNow = true;
+      }
+    }
+		else {
+      console.log(args[2])
+			url = await spoon.getTune(args[2]);
+      if(!url){
+        return message.channel.send(`I don't know '${args[2]}`);
+      }
 			if(args[3] == "now"){
 				playNow = true;
 			}
 		}
-		else {
-			url = spoon.getTune(args[1]);
-			if(args[2] == "now"){
-				playNow = true;
-			}
-		}
 	}
 
-	if(args[1].startsWith('http')){
-		url = args[1]
-		if(args[2] == "now"){
-			playNow = true;
-		}
-	}
 
+  console.log(playNow)
   const songInfo = await ytdl.getInfo(url);
 	if(songInfo){
 
@@ -134,7 +145,7 @@ async function execute(message, serverQueue, type) {
     url: songInfo.videoDetails.video_url
   };
 
-  if (!serverQueue) {
+  if (!serverQueue || playNow) {
     const queueContruct = {
       textChannel: message.channel,
       voiceChannel: voiceChannel,
@@ -197,6 +208,7 @@ async function setlist(message, serverQueue){
 		})
 	}
 }
+
 function play(guild, song) {
   const serverQueue = queue.get(guild.id);
   if (!song) {
@@ -215,15 +227,60 @@ function play(guild, song) {
   dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
   serverQueue.textChannel.send(`Start playing: **${song.title}**`);
 }
+
 function help(message, serverQueue){
 	h.forEach((item, i) => {
 		message.channel.send(`${i+1}. ${item}`);
 	});
 };
-function tags(message, song){
-	var result = [];
-	var r = ramda.clone(tunes).map(x=>x.tags);
-	r.forEach((item, i) => {
+
+async function learn(message){
+  // spoon learn (cats) http://.../ one,two,three
+  var msg = message.content.split('(')[1];
+  if(!msg){
+    return message.channel.send('oh no invalid string')
+  }
+
+  var name = msg.split(') ')[0];
+  if(!name){
+    return message.channel.send('oh no invalid string')
+  }
+  var args = msg.split(') ')[1].split(' ');
+  if(!args){
+    return message.channel.send('oh no invalid string')
+  }
+  var url = args[0];
+
+  var t = args[1].split(',');
+  var tags=[];
+  console.log(t);
+  t.forEach((item, i) => {
+    tags= tags.concat(item.replace(/ /g, ''));
+  });
+  console.log(tags)
+
+
+try{
+  const songInfo = await ytdl.getInfo(url);
+	if(songInfo){
+    var result = await  spoon.learn(name, url, tags, message);
+    return;
+    }
+
+}catch(err){
+    return message.channel.send('that is not a reel song pls try agen')
+
+}
+
+
+}
+
+async function tags(message, song){
+  var result =[];
+	var t = await spoon.getTags();
+
+	//var r = ramda.clone(tunes).map(x=>x.tags);
+	t.forEach((item, i) => {
 		result = result.concat(item);
 	});
 	message.channel.send([...new Set(result)]);
