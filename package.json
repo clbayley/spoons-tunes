@@ -5,8 +5,8 @@
   "main": "bot.js",
   "author": "Caroline Bayley",
   "scripts": {
-    "tunes": "node tunes.js",
-    "moods": "node moods.js"
+    "start": "node tunes.js"
+
   },
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
