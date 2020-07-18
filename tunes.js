@@ -179,7 +179,10 @@ async function execute(message, serverQueue, type) {
     }
   } else {
 		if(playNow){
+      serverQueue.connection.dispatcher.end();
 			serverQueue.songs.unshift(song)
+      return message.channel.send(`playing ${song.title}`);
+
 		}else{
 			serverQueue.songs.push(song);
 		}
