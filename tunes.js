@@ -160,7 +160,7 @@ async function execute(message, serverQueue, type) {
       voiceChannel: voiceChannel,
       connection: null,
       songs: [],
-      volume: 1,
+      volume: 1.5,
       playing: true
     };
 
